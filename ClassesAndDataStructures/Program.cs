@@ -20,7 +20,7 @@ namespace ClassesAndDataStructures
             Student[] students = new Student[3];
 
             students[0] = student1;
-            Student[] newArray = (Student[])students.Append(student2);
+            Student[] newArray = students.Append(student2).ToArray();
             students[2] = student3;
             Student[] newArray2 = AppendToStudentsArray(students, student4);
 
@@ -54,6 +54,17 @@ namespace ClassesAndDataStructures
             SuperList<Student> superList = new SuperList<Student>();
             superList.Push(student1);
             superList.Push(student2);
+            superList.Pop();
+            superList.unShift(student1);
+            superList.unShift(student1);
+            superList.unShift(student2);
+            superList.shift();
+            superList.Delete(1);
+
+            for (int i = 0; i < superList.Array.Length; i++)
+            {
+                Console.WriteLine(superList.Get(i).ToString());
+            }
             //superList.Push(teacher1);
 
             Student student = superList.Get(0);

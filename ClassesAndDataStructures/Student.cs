@@ -46,5 +46,10 @@ namespace ClassesAndDataStructures
             Gender = gender;
             Yob = yob;
         }
+
+        public override string ToString()
+        {
+            return Name + " " + Surname;
+        }
     }
 }

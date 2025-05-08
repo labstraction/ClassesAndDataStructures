@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +10,8 @@ namespace ClassesAndDataStructures
     internal class SuperList<T>
     {
         private T[] _realArray;
+
+        public T[] Array { get { return _realArray; } } 
 
         public SuperList()
         {
@@ -50,6 +53,74 @@ namespace ClassesAndDataStructures
             }
             _realArray = newArray;
             return element;
+        }
+
+        public void Delete(int index) 
+        {
+            if (index < 0 || index >= _realArray.Length)
+            {
+                return;
+            }
+
+            //T[] newArray = [];
+
+            //for (int i = 0; i < _realArray.Length; i++)
+            //{
+            //    if (i != index)
+            //    {
+            //        newArray = (T[])newArray.Append(_realArray[i]);
+            //    }
+
+            //}
+
+            var newArray = _realArray.Where((_, i) =>  i != index).ToArray();
+
+            _realArray = newArray;
+        }
+
+        public T? shift()
+        {
+            if (_realArray.Length == 0)
+            {
+                return default;
+            }
+
+            var newArrayLength = _realArray.Length - 1;
+
+            var newArray = new T[newArrayLength];
+
+            for (int i = 1; i < _realArray.Length; i++)
+            {
+                var selectedElement = _realArray[i];
+
+                var newIndex = i - 1;
+
+                newArray[newIndex] = selectedElement;
+            }
+
+            var element = _realArray[0];
+
+            _realArray = newArray;
+
+            return element;
+        }
+
+        public void unShift(T item)
+        {
+            var newArrayLength = _realArray.Length + 1;
+
+            var newArray = new T[newArrayLength];
+
+            newArray[0] = item;
+
+            for (int i = 1; i < newArrayLength; i++)
+            {
+                var oldIndex = i - 1;
+                var oldItem = _realArray[oldIndex];
+                newArray[i] = oldItem;
+            }
+
+            _realArray = newArray;
         }
     }
 }
